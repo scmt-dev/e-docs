@@ -1,0 +1,1 @@
+# setup project create database from db.sql in folder sql
