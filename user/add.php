@@ -2,12 +2,13 @@
 require_once '../config/config.php';
 require_once '../config/db.php';
 
+// sql select
 $sql = 'SELECT * FROM department';
+// run sql
 $results = $db->query($sql);
-print_r($results);
-
+// get all data to $rows 
+$rows = $results->fetch_all(MYSQLI_ASSOC);
 ?>
-
 
 
 <form action="" method="post">
@@ -23,7 +24,11 @@ print_r($results);
   
   <h5>Department</h5>
   <select>
-    <option value="user">User</option>
+    <?php
+    foreach ($rows as $row) {
+      echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+    }
+    ?>
   </select>
    
   <textarea name="address"  name=""  placeholder="Address"></textarea>
