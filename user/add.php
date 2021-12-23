@@ -3,7 +3,7 @@ require_once '../config/config.php';
 require_once '../config/db.php';
 
 // sql select
-$sql = 'SELECT * FROM department';
+$sql = 'SELECT * FROM departments order by id desc';
 // run sql
 $results = $db->query($sql);
 // get all data to $rows 
