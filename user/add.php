@@ -1,5 +1,11 @@
 <?php
 require_once '../config/config.php';
+require_once '../config/db.php';
+
+$sql = 'SELECT * FROM department';
+$results = $db->query($sql);
+print_r($results);
+
 ?>
 
 
@@ -14,9 +20,16 @@ require_once '../config/config.php';
     <option value="manager">Manager</option>
     <option value="admin">Super admin</option>
   </select>
+  
+  <h5>Department</h5>
+  <select>
+    <option value="user">User</option>
+  </select>
+   
   <textarea name="address"  name=""  placeholder="Address"></textarea>
-  <a href="<?php echo BASE_URL ?>/user">Cancel</a>
+  
   <button type="submit"  name="submit" value="Add user">submit</button>
+  <a href="<?php echo BASE_URL ?>/user">Cancel</a>
 </form>
 
 <style>

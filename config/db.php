@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli("localhost", "root", "", "docs");
+$db = new mysqli("localhost", "root", "root", "docs");
 
 // Check connection
 if ($db->connect_errno) {
