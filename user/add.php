@@ -41,6 +41,9 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
+<?php
+include_once '../header.php';
+?>
 
 <form action="" method="post">
 <h3>Form Add user </h3>
@@ -88,3 +91,7 @@ foreach ($rows as $row) {
     border-radius: 5px;
   }
 </style>
+
+<?php
+include_once '../footer.php';
+?>
