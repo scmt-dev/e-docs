@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 02:47 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- Host: localhost:8889
+-- Generation Time: Feb 01, 2022 at 02:59 AM
+-- Server version: 5.7.34
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,22 +33,34 @@ CREATE TABLE `customers` (
   `phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `address` text COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `department`
+-- Table structure for table `departments`
 --
 
 CREATE TABLE `departments` (
   `id` int(11) NOT NULL,
   `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name_en` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `name`, `created_at`, `update_at`, `name_en`) VALUES
+(1, 'IT Suport', '2021-12-23 02:00:29', '2021-12-23 01:59:35', NULL),
+(2, 'UX Desin', '2021-12-23 02:00:29', '2021-12-23 01:59:35', NULL),
+(3, 'UI Design', '2021-12-23 02:06:58', '2021-12-23 02:04:11', NULL),
+(4, 'Finance', '2021-12-23 03:50:27', '2021-12-23 03:50:27', NULL),
+(5, 'ຕ້ອນຮັບ', '2021-12-23 03:51:19', '2021-12-23 03:51:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,8 +80,8 @@ CREATE TABLE `docs` (
   `file` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -83,7 +94,7 @@ CREATE TABLE `doc_types` (
   `id` int(11) NOT NULL,
   `type_name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -102,15 +113,23 @@ INSERT INTO `doc_types` (`id`, `type_name`, `created_at`, `update_at`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `dep_id` int(11) NOT NULL,
-  `fullname` int(60) NOT NULL,
+  `fullname` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `role` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'user',
   `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8_unicode_ci,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `dep_id`, `fullname`, `role`, `email`, `phone`, `address`, `password`, `created_at`, `updated_at`) VALUES
+(1643076999, 5, 'mark', 'user', 'mark@gmail.com', NULL, 'Vientiane', '$2y$10$CzgVMoKRPFYu/qkwkQmlUeoHlA2LUjWTeEiIwyQoFEM0VGP.OjACa', '2022-01-25 02:16:40', '2022-01-25 02:16:40'),
+(1643683996, 2, 'admin', 'admin', 'admin@email.com', NULL, '', '$2y$10$kp9H/pmiivJPn3eVs1XgdueJnUsEtUxCc.VLR5L1FiOOK2vQNJZ6S', '2022-02-01 02:53:17', '2022-02-01 02:53:17');
 
 --
 -- Indexes for dumped tables
@@ -123,7 +142,7 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `department`
+-- Indexes for table `departments`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`id`);
