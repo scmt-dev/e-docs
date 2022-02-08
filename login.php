@@ -24,6 +24,7 @@ if (isset($_POST['login'])) {
             $_SESSION['user_fullname'] = $row->fullname;
             // set user role
             $_SESSION['user_role'] = $row->role;
+
             // check role admin or user to redirect page
             if($row->role=== 'admin'){
               header('location: admin');
